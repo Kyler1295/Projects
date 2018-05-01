@@ -1,0 +1,87 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+main{
+  height: 100vh;
+}
+#buttons{
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20%;
+  grid-template-areas:
+  ". . . ."
+  "display display display display"
+  ". . . ."
+  "nine eight seven multiplication"
+  "six five four divide"
+  "three two one plus"
+  "zero deci enter minus"
+  ". . . ."
+  ". clearBtn clearBtn .";
+  height: 90vh;
+  margin-top: 5vh;
+  justify-content: center;
+  border-radius: 15px;
+}
+.button{
+  border: 1px solid black;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+#display{
+  grid-area: display;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+#one{
+  grid-area: one;
+}
+#two{
+  grid-area: two;
+}
+#three{
+  grid-area: three;
+}
+#four{
+  grid-area: four;
+}
+#five{
+  grid-area: five;
+}
+#six{
+  grid-area: six;
+}
+#seven{
+  grid-area: seven;
+}
+#eight{
+  grid-area: eight;
+}
+#nine{
+  grid-area: nine;
+}
+#zero{
+  grid-area: zero;
+}
+#plus{
+  grid-area: plus;
+}
+#minus{
+  grid-area: minus;
+}
+#multiplication{
+  grid-area: multiplication;
+}
+#divide{
+  grid-area: divide;
+}
+#deci{
+  grid-area: deci;
+}
+#enter{
+  grid-area: enter;
+}
+#clear{
+  grid-area: clearBtn;
+}

@@ -1,0 +1,70 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; }
+
+body {
+  width: 100vw; }
+
+span {
+  display: flex; }
+
+h3 {
+  font-size: 1.5rem !important; }
+
+header {
+  width: 95%;
+  display: flex !important;
+  justify-content: space-around;
+  align-items: center; }
+
+input {
+  width: 40% !important; }
+
+.logo {
+  width: 45%; }
+
+.championImage {
+  width: 100%;
+  border: 1px solid white; }
+
+.championList {
+  width: 95%;
+  padding: 1%; }
+
+.championStats {
+  height: 22%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  color: white;
+  flex-direction: column;
+  padding-left: 13%; }
+
+.selected {
+  position: fixed;
+  width: 100vw !important;
+  height: 100vh;
+  top: 0;
+  left: 0 !important;
+  background-color: rgba(84, 84, 84, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all .3s ease-in; }
+
+.smallImage {
+  width: 15%; }
+
+.championSpells {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%; }
+
+.spell {
+  width: 25%; }
+
+/*# sourceMappingURL=styles.css.map */

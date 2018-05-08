@@ -1,15 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="styles/css/styles.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css' />
+    <title>Champion Stats</title>
 </head>
-<body>
-    
 
+<body class="grey darken-4">
 
-    <script src="RiotGamesApi.js"></script>
+    <!-- Initiates the Vue Instance -->
+    <div class="wrapper container" id="app">
+
+        <!-- Header Section -->
+        <header class="row">
+            <!-- Logo -->
+            <h1 class="logo white-text">ChampionStats</h1>
+            <!-- Search Bar -->
+            <input class="col xs6 m4 offset-m2 white-text" type="text" v-model="championSearch" placeholder="Search for a Champion">
+        </header>
+
+        <!-- CTA -->
+        <h3 class="white-text">Your all in one place for champion base stats</h3>
+
+        <!-- Main Champion List -->
+        <main class="championList grey row">
+
+            <!-- Looped list of champions -->
+            <div @click="closeAll(champion.name)" :class="{selected : champion.show}" class="championSquare col s4 m1" v-for="champion in championSearchResults">
+                <!-- Champion Name -->
+                <h3 class="championName" v-if="champion.show">{{ champion.name }}</h3>
+                <!-- Champion Picture -->
+                <img class="championImage" :class="{smallImage : champion.show}" :src="'http://ddragon.leagueoflegends.com/cdn/8.9.1/img/champion/' + champion.champKey + '.png'" :alt="champion.name">
+                <!-- Champion Statistics -->
+                <div class="championStats" v-if="champion.show">
+                    <!-- Armor -->
+                    <span class="stat">
+                        <strong>Armor: </strong>
+                        <p>{{ champion.armor }}</p>
+                    </span>
+                    <!-- Armor Pen -->
+                    <span class="stat">
+                        <strong>Armor Penetration: </strong>
+                        <p>{{ champion.armorpl }}</p>
+                    </span>
+                    <!-- AD -->
+                    <span class="stat">
+                        <strong>Attack Damage: </strong>
+                        <p>{{ champion.ad }}</p>
+                    </span>
+                    <!-- AD/Level -->
+                    <span class="stat">
+                        <strong>Attack Damage Per Level: </strong>
+                        <p>{{ champion.adpl }}</p>
+                    </span>
+                    <span class="stat">
+                        <strong>Attack Range: </strong>
+                        <p>{{ champion.attrng }}</p>
+                    </span>
+                    <!-- AS/Level -->
+                    <span class="stat">
+                        <strong>Attack Speed Per Level: </strong>
+                        <p>{{ champion.attspdpl }}</p>
+                    </span>
+                    <!-- HP -->
+                    <span class="stat">
+                        <strong>Hit Points: </strong>
+                        <p>{{ champion.hp }}</p>
+                    </span>
+                    <!-- HP/Level -->
+                    <span class="stat">
+                        <strong>Hit Points Per Level: </strong>
+                        <p>{{ champion.hppl }}</p>
+                    </span>
+                    <!-- HP Regen -->
+                    <span class="stat">
+                        <strong>Hit Points Regen: </strong>
+                        <p>{{ champion.hpregen }}</p>
+                    </span>
+                    <!-- HP Regen/level -->
+                    <span class="stat">
+                        <strong>Hit Points Regen Per Level: </strong>
+                        <p>{{ champion.hpregenpl }}</p>
+                    </span>
+                    <!-- MS -->
+                    <span class="stat">
+                        <strong>Movement Speed: </strong>
+                        <p>{{ champion.ms }}</p>
+                    </span>
+                    <!-- Mana -->
+                    <span class="stat">
+                        <strong>Mana: </strong>
+                        <p>{{ champion.mana }}</p>
+                    </span>
+                    <!-- Mana/Level -->
+                    <span class="stat">
+                        <strong>Mana Per Level: </strong>
+                        <p>{{ champion.manapl }}</p>
+                    </span>
+                    <!-- Mana Regen -->
+                    <span class="stat">
+                        <strong>Mana Regen: </strong>
+                        <p>{{ champion.manareg }}</p>
+                    </span>
+                    <!-- Mana Regen/Level -->
+                    <span class="stat">
+                        <strong>Mana Regen Per Level: </strong>
+                        <p>{{ champion.manaregpl }}</p>
+                    </span>
+                    <!-- MR -->
+                    <span class="stat">
+                        <strong>Magic Resist: </strong>
+                        <p>{{ champion.mr }}</p>
+                    </span>
+                    <!-- MR/Level -->
+                    <span class="stat">
+                        <strong>Magic Resist Per Level: </strong>
+                        <p>{{ champion.mrpl }}</p>
+                    </span>
+                </div>
+
+                <!-- Champion Spells information -->
+                <div class="championSpells" v-if="champion.show">
+                    <!-- Loops through all of a champions spells -->
+                    <div class="spell" v-for="spell in champion.spells">
+                        <!-- Spell name -->
+                        <h5 class="spellName">{{ spell.name }}</h5>
+                        <!-- Spell Image -->
+                        <img :src="'http://ddragon.leagueoflegends.com/cdn/8.9.1/img/spell/' + spell.image.full" alt="">
+                        <!-- Cooldown -->
+                        <span class="stat">
+                            <strong>Cooldown: </strong>
+                            <p v-for="cooldown in spell.cooldown">{{ cooldown }}/</p>
+                        </span>
+                        <!-- Spell cost -->
+                        <span class="stat">
+                            <strong>Cost: </strong>
+                            <p v-for="cost in spell.cost">{{ cost }}/</p>
+                        </span>
+                        <!-- Spell Description -->
+                        <span>{{ spell.description }}</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer>
+
+        </footer>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js'></script>
+    <script src="scripts/RiotGamesApi.js"></script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
     class Champion {
-        constructor(champKey, name, armor, armorpl, ad, adpl, attrng, attspdpl, hp, hppl, hpregen, hpregenpl, ms, mana, manapl, manareg, manaregpl, mr, mrpl, spells, show) {
+        constructor(champID, champKey, name, armor, armorpl, ad, adpl, attrng, attspdpl, hp, hppl, hpregen, hpregenpl, ms, mana, manapl, manareg, manaregpl, mr, mrpl, spells, passive,  show) {
+            this.champID = champID;
             this.champKey = champKey;
             this.name = name;
             this.armor = armor;
@@ -20,6 +21,7 @@
             this.mr = mr;
             this.mrpl = mrpl;
             this.spells = spells;
+            this.passive = [];
             this.show = false;
         }
     }
@@ -41,6 +43,7 @@
                 .then((jsonResponse) => {
                     Object.entries(jsonResponse[2][1]).forEach(element => {
                         let newChampion = new Champion(
+                            element[1].id,
                             element[1].key,
                             element[1].name,
                             element[1].stats.armor,
@@ -62,6 +65,22 @@
                             element[1].stats.spellblockperlevel,
                             element[1].spells
                         )
+
+                        newChampion.passive = getChampionPassive(newChampion.champID);
+
+                        function getChampionPassive(id) {
+                            fetch('https://na1.api.riotgames.com/lol/static-data/v3/champions/' + id +'?locale=en_US&champData=passive&api_key=RGAPI-b060ac42-3470-4ed5-ae5b-fff6a0f9b1dc')
+                                .then(function (response) {
+                                    return response.json();
+                                })
+                                .then(function (data) {
+                                    return Object.entries(data)
+                                })
+                                .then((jsonResponse) => {
+                                    console.log(jsonResponse);
+                                });
+                        }
+                        
 
                         this.champions.push(newChampion);
 
